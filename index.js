@@ -3,7 +3,8 @@ const { login } = require("tplink-cloud-api");
 (async () => {
   const tplink = await login(process.env.user, process.env.password);
   const deviceList = await tplink.getDeviceList();
-  const device = deviceList[0]
+  // doesn't support P100 plug which is what i got :(
+  const device = await tplink.getHS100(deviceList[0].deviceId);
   console.log(device)
   //check if node argument include on/off
   if(process.argv.includes('on')) {
